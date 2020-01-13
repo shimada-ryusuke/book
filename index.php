@@ -58,7 +58,7 @@ if(isset($_POST['login'])) {
 <div class="col-xs-6 col-xs-offset-3">
 
 <form method="post">
-	<h1>ログインフォーム</h1>
+	<h1>ログイン画面</h1>
 	<div class="form-group">
 		<input type="email"  class="form-control" name="email" placeholder="メールアドレス" required />
 	</div>
