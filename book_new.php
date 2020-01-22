@@ -33,11 +33,9 @@
     $title = $mysqli->real_escape_string($_POST['title']);
     $publication_year = $mysqli->real_escape_string($_POST['publication_year']);
     $author = $mysqli->real_escape_string($_POST['author']);
-​
     // POSTされた情報をDBに格納する
     $query .= "INSERT INTO books(title, publication_year, author) ";
     $query .= "VALUES('$title','$publication_year','$author')";
-​
     //↓↓登録できたかどうかのメッセージ出力だから気にしなくていい
     if($mysqli->query($query)) {  ?>
       <div class="alert alert-success" role="alert">登録しました</div>

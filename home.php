@@ -31,7 +31,7 @@ $result->close();
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PHPのマイページ機能</title>
+<title>図書管理システム 会員プロフィール</title>
 <link rel="stylesheet" href="style.css">
 <!-- Bootstrap読み込み（スタイリングのため） -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
@@ -46,7 +46,7 @@ $result->close();
 	<li>メールアドレス：<?php echo $email; ?></li>
 </ul>
 <a href="logout.php?logout">ログアウト</a>
-
+<a href="book_new.php">書籍登録画面へ</a>
 </div>
 </body>
 </html>
