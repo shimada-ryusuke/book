@@ -2,7 +2,7 @@
   //*****決まり文句のおまじない******
   //sessionのスタート（これがないとSessionを拾ってくれない）
   session_start();
-  if( isset($_SESSION['user']) != "") {
+  if( isset($_SESSION['user']) == "") {
     // ログイン済みの場合はリダイレクト
     header("Location: home.php");
   }
