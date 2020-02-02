@@ -8,8 +8,7 @@
   }
   // DBとの接続
   include_once 'dbconnect.php';
-  //*********************************
-​
+  //*********************************​
   //SQL文の作成
   $query = "";
   $query .= "SELECT title FROM books";
@@ -38,11 +37,12 @@
       <th>著者</th>
     </tr>
     <?php
-    foreach ($hogehoge as $row) {
+    $book = ['id','title','','','リンゴ',''];
+    foreach ($ as $row) {
       ?>
       <tr>
         <th><?php echo($row['id']); ?></th>
-        <th><a href="hogehoge.php"><?php echo($row['title']); ?></a></th>
+        <th><a href="book_title.php"><?php echo($row['title']); ?></a></th>
         <th><?php echo($row['publication_year']); ?></th>
         <th><?php echo($row['author']); ?></th>
       </tr>
