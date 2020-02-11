@@ -9,12 +9,13 @@
   // DBとの接続
   include_once 'dbconnect.php';
   //*********************************​
-  //SQL文の作成
+  //SQL文の作成  
   $query = "";
-  $query .= "SELECT title FROM books";
+  $query .= "SELECT * FROM books";
   //SELECT文の実行
   $result = $mysqli->query($query);
 ?>
+
 <!DOCTYPE HTML>
 <html lang="ja">
 <head>                                          
@@ -37,12 +38,11 @@
       <th>著者</th>
     </tr>
     <?php
-    $book = ['id','title','','','リンゴ',''];
-    foreach ($ as $row) {
+    foreach ($result as $row) {
       ?>
       <tr>
         <th><?php echo($row['id']); ?></th>
-        <th><a href="book_title.php"><?php echo($row['title']); ?></a></th>
+        <th><a href={{ "book_show.php?id=" . $row['id'] }}><?php echo($row['title']); ?></a></th>
         <th><?php echo($row['publication_year']); ?></th>
         <th><?php echo($row['author']); ?></th>
       </tr>
