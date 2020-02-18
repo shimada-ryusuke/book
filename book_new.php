@@ -64,11 +64,12 @@
     </div> 
     <button type="submit" class="btn btn-default" name="book_register">登録</button>
     <p>
-    <p><button type="submit" class="btn btn-default" .<a href="logout.php?logout">ログアウト</a></p>>登録</button>
+    
     <p><a href="logout.php?logout">ログアウト</a></p>
     <p><a href="book_new.php">マイページ</a></p>
     </p>
   </form>
+  <p><button type="submit" class="btn btn-default">ログアウト</button></p>
 </div>
 </body>
 </html>

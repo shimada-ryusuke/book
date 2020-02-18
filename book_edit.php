@@ -25,14 +25,14 @@
 <head>                                          
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>詳細</title>
+<title>詳細(編集ページ)</title>
 <link rel="stylesheet" href="style.css">
 ​
 <!-- Bootstrap読み込み（スタイリングのため） -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 </head>
 <body>
-  <h1><?php echo "詳細"; ?></h1>
+  <h1>詳細</h1>
   <table class="table">
     <tr>  
       <!-- 表の項目名部分 -->
@@ -44,16 +44,29 @@
     <?php
     foreach ($result as $row) {
       ?>
-      <tr>
-        <th><?php echo($row['id']); ?></th>
-        <th><a href= <?php "book_show.php?id=" . $row['id'] ?>><?php echo($row['title']); ?></a></th>
-        <th><?php echo($row['publication_year']); ?></th>
-        <th><?php echo($row['author']); ?></th>
-      </tr>
+      <form method="post">
+        <tr>
+          <th><?php echo($row['id']); ?></th>
+          <th>
+            <div class="form-group">
+              <input type="text"  class="form-control" name="textbox" required value=<?php echo($row['title']);?> />
+            </div>
+          </th>
+          <th>
+            <div class="form-group">
+              <input type="date"  class="form-control" name="textbox" required value=<?php echo($row['publication_year']);?> />
+            </div>
+          </th>
+          <th>
+            <div class="form-group">
+              <input type="text"  class="form-control" name="textbox" required value=<?php echo($row['author']);?> />
+            </div>
+          </th>     
+        </tr>
+      </form>
       <?php
     }
     ?>
   </table>
-  <p><button type="submit" class="btn btn-default">編集</button></p>
 </body>
 </html>
