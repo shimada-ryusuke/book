@@ -38,7 +38,11 @@
     $query .= "VALUES('$title','$publication_year','$author')";
     //↓↓登録できたかどうかのメッセージ出力だから気にしなくていい
     if($mysqli->query($query)) {  ?>
-      <div class="alert alert-success" role="alert">登録しました</div>
+      <div class="alert alert-success" role="alert">
+        登録しました.
+        <p><a href="book_index.php">書籍一覧画面へ</a></p>
+        <p><a href="logout.php?logout">ログアウト</a></p>
+    </div>
       <?php } else { ?>
       <div class="alert alert-danger" role="alert">エラーが発生しました。</div>
       <?php

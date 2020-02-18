@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 </head>
 <body>
-  <h1><?php echo "hogehoge"; ?></h1>
+  <h1><?php echo "詳細"; ?></h1>
   <table class="table">
     <tr>  
       <!-- 表の項目名部分 -->

@@ -45,8 +45,9 @@ $result->close();
 	<li>名前：<?php echo $username; ?></li>
 	<li>メールアドレス：<?php echo $email; ?></li>
 </ul>
-<a href="logout.php?logout">ログアウト</a>
-<a href="book_new.php">書籍登録画面へ</a>
+<p><a href="logout.php?logout">ログアウト</a></p>
+<p><a href="book_new.php">書籍登録画面へ</a></p>
+<p><a href="book_index.php">書籍一覧画面</a></p>
 </div>
 </body>
 </html>
