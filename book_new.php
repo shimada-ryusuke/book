@@ -65,11 +65,13 @@
     <button type="submit" class="btn btn-default" name="book_register">登録</button>
     <p>
     
-    <p><a href="logout.php?logout">ログアウト</a></p>
-    <p><a href="book_new.php">マイページ</a></p>
+    <!-- <p><a href="logout.php?logout">ログアウト</a></p> -->
+    <!-- <p><a href="home.php">マイページ</a></p> -->
     </p>
   </form>
-  <p><button type="submit" class="btn btn-default">ログアウト</button></p>
+  <p><input type="button" value="マイページ" onClick="location.href='home.php'"></p>
+  <p><input type="button" value="ログアウト" onClick="location.href='logout.php?logout'"></p>
+  <!-- <p><button type="button" class="btn btn-default" href="logout.php?logout">ログアウト</button></p> -->
 </div>
 </body>
 </html>

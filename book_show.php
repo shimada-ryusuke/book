@@ -55,5 +55,6 @@
     ?>
   </table>
   <p><button type="submit" class="btn btn-default">編集</button></p>
+  <p><a href="book_edit.php">編集</a></p>
 </body>
 </html>
