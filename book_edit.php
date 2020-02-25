@@ -18,6 +18,7 @@
   foreach ($result as $row) {
     $book_id = $row['id'];
   }
+  var_dump($query);
 ?>
 
 <!DOCTYPE HTML>

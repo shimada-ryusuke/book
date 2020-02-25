@@ -50,11 +50,12 @@
         <th><?php echo($row['publication_year']); ?></th>
         <th><?php echo($row['author']); ?></th>
       </tr>
+      <p><button type="button" class="btn btn-default" 
+      onclick="<?php echo "location.href='book_edit.php?id=" . $row['id'] . "'" ?>">編集</button></p>
       <?php
     }
     ?>
   </table>
-  <p><button type="submit" class="btn btn-default">編集</button></p>
-  <p><a href="book_edit.php">編集</a></p>
+
 </body>
 </html>
