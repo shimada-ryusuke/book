@@ -18,7 +18,33 @@
   foreach ($result as $row) {
     $book_id = $row['id'];
   }
-  var_dump($query);
+  // var_dump($query);
+?>
+  
+<?php
+  //更新ボタンが押されたときのみ処理
+  if(isset($_POST['book_update'])){
+    //更新ボタンが押された後の処理
+    // echo $_POST["title"];
+    $title = $mysqli->real_escape_string($_POST['title']);
+    $publication_year = $mysqli->real_escape_string($_POST['publication_year']);
+    $author = $mysqli->real_escape_string($_POST['author']);
+    // POSTされた情報をDBに格納する
+    $query .= "UPDATE `books` SET title='"'.,.$_title'" publication_year='',`author`='' WHERE id = ".$_GET['id'];
+    -- UPDATE `books` SET ,title='',`publication_year`='',`author`='' WHERE id=''
+    //↓↓更新できたかどうかのメッセージ出力だから気にしなくていい
+    if($mysqli->query($query)) {  ?>
+      <div class="alert alert-success" role="alert">
+        登録しました.
+        <p><a href="book_index.php">書籍一覧画面へ</a></p>
+        <p><a href="logout.php?logout">ログアウト</a></p>
+    </div>
+      <?php } else { ?>
+      <div class="alert alert-danger" role="alert">エラーが発生しました。</div>
+      <?php
+    }
+  }
+  
 ?>
 
 <!DOCTYPE HTML>
@@ -64,6 +90,7 @@
             </div>
           </th>     
         </tr>
+        <button type="submit"   class="btn btn-default" name="book_update">更新</button>
       </form>
       <?php
     }
