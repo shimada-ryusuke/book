@@ -46,7 +46,7 @@
       ?>
       <tr>
         <th><?php echo($row['id']); ?></th>
-        <th><a href= <?php "book_show.php?id=" . $row['id'] ?>><?php echo($row['title']); ?></a></th>
+        <th><?php echo($row['title']); ?></a></th>
         <th><?php echo($row['publication_year']); ?></th>
         <th><?php echo($row['author']); ?></th>
       </tr>

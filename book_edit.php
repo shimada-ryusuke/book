@@ -18,10 +18,10 @@
   foreach ($result as $row) {
     $book_id = $row['id'];
   }
-  // var_dump($query);
+
 ?>
   
-<?php
+  <?php
   //更新ボタンが押されたときのみ処理
   if(isset($_POST['book_update'])){
     //更新ボタンが押された後の処理
@@ -30,14 +30,12 @@
     $publication_year = $mysqli->real_escape_string($_POST['publication_year']);
     $author = $mysqli->real_escape_string($_POST['author']);
     // POSTされた情報をDBに格納する
-    $query .= "UPDATE `books` SET title='"'.,.$_title'" publication_year='',`author`='' WHERE id = ".$_GET['id'];
-    -- UPDATE `books` SET ,title='',`publication_year`='',`author`='' WHERE id=''
+    $query .= "UPDATE books SET ,'$title ='',$publication_year=,'$author WHERE id = '".$_GET['id'];
+    
     //↓↓更新できたかどうかのメッセージ出力だから気にしなくていい
     if($mysqli->query($query)) {  ?>
       <div class="alert alert-success" role="alert">
-        登録しました.
-        <p><a href="book_index.php">書籍一覧画面へ</a></p>
-        <p><a href="logout.php?logout">ログアウト</a></p>
+        更新しました。
     </div>
       <?php } else { ?>
       <div class="alert alert-danger" role="alert">エラーが発生しました。</div>
@@ -46,6 +44,7 @@
   }
   
 ?>
+
 
 <!DOCTYPE HTML>
 <html lang="ja">
@@ -76,17 +75,17 @@
           <th><?php echo($row['id']); ?></th>
           <th>
             <div class="form-group">
-              <input type="text"  class="form-control" name="textbox" required value=<?php echo($row['title']);?> />
+              <input type="text"  class="form-control" name="title" required value=<?php echo($row['title']);?> />
             </div>
           </th>
           <th>
             <div class="form-group">
-              <input type="date"  class="form-control" name="textbox" required value=<?php echo($row['publication_year']);?> />
+              <input type="date"  class="form-control" name="publication_year" required value=<?php echo($row['publication_year']);?> />
             </div>
           </th>
           <th>
             <div class="form-group">
-              <input type="text"  class="form-control" name="textbox" required value=<?php echo($row['author']);?> />
+              <input type="text"  class="form-control" name="author" required value=<?php echo($row['author']);?> />
             </div>
           </th>     
         </tr>
