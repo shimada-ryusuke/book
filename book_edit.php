@@ -30,8 +30,8 @@
     $publication_year = $mysqli->real_escape_string($_POST['publication_year']);
     $author = $mysqli->real_escape_string($_POST['author']);
     // POSTされた情報をDBに格納する
-    $query .= "UPDATE books SET ,'$title ='',$publication_year=,'$author WHERE id = '".$_GET['id'];
-    
+    $query = "";
+    $query = "UPDATE books SET title = '" . $title . "', publication_year = '" . $publication_year . "', author = '" . $author . "' WHERE id = ".$_GET['id'];    var_dump($query);
     //↓↓更新できたかどうかのメッセージ出力だから気にしなくていい
     if($mysqli->query($query)) {  ?>
       <div class="alert alert-success" role="alert">
@@ -97,3 +97,5 @@
   </table>
 </body>
 </html>
+
+<!-- UPDATE books SET title="伝える力２",publication_year="2020-01-22" ,author="池上彰" WHERE id = 2 -->
