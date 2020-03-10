@@ -40,9 +40,9 @@
     if($mysqli->query($query)) {  ?>
       <div class="alert alert-success" role="alert">
         登録しました.
-        <p><a href="book_index.php">書籍一覧画面へ</a></p>
-        <p><a href="logout.php?logout">ログアウト</a></p>
     </div>
+        <p><a href="book_index.php">書籍一覧画面へ</a></p>
+        <p><a href="home.php">マイページ</a></p>
       <?php } else { ?>
       <div class="alert alert-danger" role="alert">エラーが発生しました。</div>
       <?php
@@ -70,7 +70,7 @@
     </p>
   </form>
   <p><input type="button" value="マイページ" onClick="location.href='home.php'"></p>
-  <p><input type="button" value="ログアウト" onClick="location.href='logout.php?logout'"></p>
+  <p><input type="button" value="書籍一覧表示へ" onClick="location.href='book_index.php'"></p>
   <!-- <p><button type="button" class="btn btn-default" href="logout.php?logout">ログアウト</button></p> -->
 </div>
 </body>

@@ -50,5 +50,7 @@
     }
     ?>
   </table>
+  <p><button type="button" class="btn btn-default"
+      onclick="<?php echo "location.href='home.php". "'" ?>">マイページへ戻る</button></p>
 </body>
 </html>

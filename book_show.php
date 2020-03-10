@@ -52,6 +52,8 @@
       </tr>
       <p><button type="button" class="btn btn-default" 
       onclick="<?php echo "location.href='book_edit.php?id=" . $row['id'] . "'" ?>">編集</button></p>
+      <p><button type="button" class="btn btn-default"
+      onclick="<?php echo "location.href='book_index.php". "'" ?>">一覧へ戻る</button></p>
       <?php
     }
     ?>
