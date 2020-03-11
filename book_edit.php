@@ -94,8 +94,6 @@
         </tr>
         <button type="submit"   class="btn btn-default" name="book_update">更新</button>
         <p><button type="button" class="btn btn-default" 
-          onclick="<?php echo "location.href='book_delete.php?id=" . $row['id'] . "'" ?>">削除する</button></p>
-        <p><button type="button" class="btn btn-default" 
           onclick="<?php echo "location.href='book_show.php?id=" . $row['id'] . "'" ?>">詳細へ戻る</button></p>
       </form>
       <?php
