@@ -40,6 +40,7 @@
       <th>書籍名</th>
       <th>出版年</th>
       <th>著者</th>
+      <th>貸出状況</th>
     </tr>
     <?php
     foreach ($result as $row) {
@@ -49,9 +50,12 @@
         <th><?php echo($row['title']); ?></a></th>
         <th><?php echo($row['publication_year']); ?></th>
         <th><?php echo($row['author']); ?></th>
+        <th><?php echo($row['book_status']); ?></th>
       </tr>
       <p><button type="button" class="btn btn-default" 
       onclick="<?php echo "location.href='book_edit.php?id=" . $row['id'] . "'" ?>">編集</button></p>
+      <p><button type="button" class="btn btn-default" 
+      onclick="<?php echo "location.href='book_status.php?id=" . $row['id'] . "'" ?>">貸出管理</button></p>
       <p><button type="button" class="btn btn-default" 
       onclick="<?php echo "location.href='book_delete.php?id=" . $row['id'] . "'" ?>">削除する</button></p>
       <p><button type="button" class="btn btn-default"

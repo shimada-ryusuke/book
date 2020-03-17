@@ -36,6 +36,7 @@
       <th>書籍名</th>
       <th>出版年</th>
       <th>著者</th>
+      <th>貸出状況</th>
     </tr>
     <?php
     foreach ($result as $row) {
@@ -45,6 +46,7 @@
         <th><a href= <?php echo "book_show.php?id=" . $row['id'] ?>><?php echo($row['title']); ?></a></th>
         <th><?php echo($row['publication_year']); ?></th>
         <th><?php echo($row['author']); ?></th>
+        <th><?php echo($row['book_status']); ?></th>
       </tr>
       <?php
     }
