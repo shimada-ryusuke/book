@@ -37,6 +37,8 @@
       <th>出版年</th>
       <th>著者</th>
       <th>貸出状況</th>
+      <th>貸出日付</th>
+      <th>最終貸与者</th>
     </tr>
     <?php
     foreach ($result as $row) {
@@ -47,6 +49,8 @@
         <th><?php echo($row['publication_year']); ?></th>
         <th><?php echo($row['author']); ?></th>
         <th><?php echo($row['book_status']); ?></th>
+        <th><?php echo($row['rental_day']); ?></th>
+        <th><?php echo($row['rental_user']); ?></th>
       </tr>
       <?php
     }

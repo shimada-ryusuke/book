@@ -26,12 +26,17 @@
   if(isset($_POST['book_status'])){
     //貸出情報を更新ボタンが押された後の処理
     // echo $_POST["book_status"];
-    $status = $mysqli->real_escape_string($_POST['book_status']);
+    // var_dump($_POST);
+    $book_status = $mysqli->real_escape_string($_POST['book_status']);
+    $rental_day = $mysqli->real_escape_string($_POST['rental_day']);
+    $rental_user = $mysqli->real_escape_string($_POST['rental_user']);
+    // $publication_year = $mysqli->real_escape_string($_POST['publication_year']); ←参考
     // POSTされた情報をDBに格納する
     $query = "";
-    $query = "UPDATE books SET book_status = '" . $book_status . "' WHERE id = ".$_GET['id'];    
-    var_dump($query);
+    $query = "UPDATE books SET book_status = '" . $book_status . "', rental_day = '" . $rental_day . "', rental_user = '" . $rental_user . "'  WHERE id = ".$_GET['id'];  
+    // var_dump($query);
     // UPDATE `books` SET `book_status` = '貸出中' WHERE `books`.`id` = 14;　←SQL文
+    // $query = "UPDATE books SET title = '" . $title . "', publication_year = '" . $publication_year . "', author = '" . $author . "' WHERE id = ".$_GET['id'];　←参考
     //↓↓貸出情報を更新できたかどうかのメッセージ出力だから気にしなくていい
     if($mysqli->query($query)) {  ?>
       <div class="alert alert-success" role="alert">
@@ -65,7 +70,8 @@
     <tr>  
       <!-- 表の項目名部分 -->
       <th>貸出状況</th>
-      <th>借りている人</th>
+      <th>貸出日付</th>
+      <th>最終貸与者</th>
     </tr>
     <?php
     foreach ($result as $row) {
@@ -76,7 +82,17 @@
             <div class="form-group">
               <input type="text"  class="form-control" name="book_status" required value=<?php echo($row['book_status']);?> />
             </div>
-          </th>    
+          </th>
+          <th>
+            <div class="form-group">
+              <input type="date"  class="form-control" name="rental_day" required value=<?php echo($row['rental_day']);?> />
+            </div>
+          </th>
+          <th>
+            <div class="form-group">
+              <input type="text"  class="form-control" name="rental_user" required value=<?php echo($row['rental_user']);?> />
+            </div>
+          </th>     
         </tr>
         <button type="submit"   class="btn btn-default" name="book_status">貸出情報を更新</button>
         <p><button type="button" class="btn btn-default" 
