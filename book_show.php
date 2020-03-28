@@ -11,13 +11,14 @@
   //*********************************​
   //SQL文の作成  
   $query = "";
-  $query .= "SELECT * FROM books WHERE id = ".$_GET['id'];
+  $query .= "SELECT books.id, books.title, books.publication_year, author.name ";
+  $query .= " FROM books, author WHERE books.id = ".$_GET['id'] . " AND author.id = books.author_id";
+
   //SELECT文の実行
+  echo "query:" . $query;
   $result = $mysqli->query($query);
   $book_id = "";
-  foreach ($result as $row) {
-    $book_id = $row['id'];
-  }
+
 ?>
 
 <!DOCTYPE HTML>
@@ -40,8 +41,6 @@
       <th>書籍名</th>
       <th>出版年</th>
       <th>著者</th>
-      <th>貸出状況</th>
-      <th>最終貸与者</th>
     </tr>
     <?php
     foreach ($result as $row) {
@@ -50,9 +49,7 @@
         <th><?php echo($row['id']); ?></th>
         <th><?php echo($row['title']); ?></a></th>
         <th><?php echo($row['publication_year']); ?></th>
-        <th><?php echo($row['author']); ?></th>
-        <th><?php echo($row['book_status']); ?></th>
-        <th><?php echo($row['rental_user']); ?></th>
+        <th><?php echo($row['name']); ?></th>
       </tr>
       <p><button type="button" class="btn btn-default" 
       onclick="<?php echo "location.href='book_edit.php?id=" . $row['id'] . "'" ?>">編集</button></p>

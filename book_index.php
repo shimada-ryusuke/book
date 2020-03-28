@@ -11,7 +11,9 @@
   //*********************************​
   //SQL文の作成  
   $query = "";
-  $query .= "SELECT * FROM books";
+  $query .= "SELECT books.id AS book_id, books.title, books.publication_year, author.name ";
+  $query .= " FROM books, author WHERE books.author_id = author.id; ";
+  //↑　SQL文の内部結合
   //SELECT文の実行
   $result = $mysqli->query($query);
 ?>
@@ -36,21 +38,15 @@
       <th>書籍名</th>
       <th>出版年</th>
       <th>著者</th>
-      <th>貸出状況</th>
-      <th>貸出日付</th>
-      <th>最終貸与者</th>
     </tr>
     <?php
     foreach ($result as $row) {
       ?>
       <tr>
-        <th><?php echo($row['id']); ?></th>
-        <th><a href= <?php echo "book_show.php?id=" . $row['id'] ?>><?php echo($row['title']); ?></a></th>
+      <th><?php echo($row['book_id']); ?></th>
+        <th><a href= <?php echo "book_show.php?id=" . $row['book_id'] ?>><?php echo($row['title']); ?></a></th>
         <th><?php echo($row['publication_year']); ?></th>
-        <th><?php echo($row['author']); ?></th>
-        <th><?php echo($row['book_status']); ?></th>
-        <th><?php echo($row['rental_day']); ?></th>
-        <th><?php echo($row['rental_user']); ?></th>
+        <th><?php echo($row['name']); ?></th>
       </tr>
       <?php
     }
