@@ -54,7 +54,7 @@
       <p><button type="button" class="btn btn-default" 
       onclick="<?php echo "location.href='book_edit.php?id=" . $row['id'] . "'" ?>">編集</button></p>
       <p><button type="button" class="btn btn-default" 
-      onclick="<?php echo "location.href='book_status.php?id=" . $row['id'] . "'" ?>">貸出管理</button></p>
+      onclick="<?php echo "location.href='book_rent.php?id=" . $row['id'] . "'" ?>">貸出する</button></p>
       <p><button type="button" class="btn btn-default" 
       onclick="<?php echo "location.href='book_delete.php?id=" . $row['id'] . "'" ?>">削除する</button></p>
       <p><button type="button" class="btn btn-default"

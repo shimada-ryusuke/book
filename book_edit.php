@@ -11,7 +11,7 @@
   //*********************************​
   //SQL文の作成  
   $query = "";
-  $query .= "SELECT * FROM books WHERE id = ".$_GET['id'];
+  $query .= "SELECT * FROM books INNER JOIN author ON books.author_id = author.id WHERE books.id = ".$_GET['id'];
   //SELECT文の実行
   $result = $mysqli->query($query);
   $book_id = "";
@@ -28,7 +28,7 @@
     // echo $_POST["title"];
     $title = $mysqli->real_escape_string($_POST['title']);
     $publication_year = $mysqli->real_escape_string($_POST['publication_year']);
-    $author = $mysqli->real_escape_string($_POST['author']);
+    $author = $mysqli->real_escape_string($_POST['name']);
     // POSTされた情報をDBに格納する
     $query = "";
     $query = "UPDATE books SET title = '" . $title . "', publication_year = '" . $publication_year . "', author = '" . $author . "' WHERE id = ".$_GET['id'];    
@@ -88,7 +88,7 @@
           </th>
           <th>
             <div class="form-group">
-              <input type="text"  class="form-control" name="author" required value=<?php echo($row['author']);?> />
+              <input type="text"  class="form-control" name="author" required value=<?php echo($row['name']);?> />
             </div>
           </th>     
         </tr>
