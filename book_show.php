@@ -11,8 +11,8 @@
   //*********************************​
   //SQL文の作成  
   $query = "";
-  $query .= "SELECT books.id, books.title, books.publication_year, author.name ";
-  $query .= " FROM books, author WHERE books.id = ".$_GET['id'] . " AND author.id = books.author_id";
+  $query .= "SELECT books.id, books.title, books.publication_year, authors.author_name ";
+  $query .= " FROM books, authors WHERE books.id = ".$_GET['id'] . " AND authors.id = books.author_id";
 
   //SELECT文の実行
   echo "query:" . $query;
@@ -49,7 +49,7 @@
         <th><?php echo($row['id']); ?></th>
         <th><?php echo($row['title']); ?></a></th>
         <th><?php echo($row['publication_year']); ?></th>
-        <th><?php echo($row['name']); ?></th>
+        <th><?php echo($row['author_name']); ?></th>
       </tr>
       <p><button type="button" class="btn btn-default" 
       onclick="<?php echo "location.href='book_edit.php?id=" . $row['id'] . "'" ?>">編集</button></p>

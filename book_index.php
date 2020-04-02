@@ -11,8 +11,8 @@
   //*********************************​
   //SQL文の作成  
   $query = "";
-  $query .= "SELECT books.id AS book_id, books.title, books.publication_year, author.name ";
-  $query .= " FROM books, author WHERE books.author_id = author.id; ";
+  $query .= "SELECT books.id AS book_id, books.title, books.publication_year, authors.author_name ";
+  $query .= " FROM books, authors WHERE books.author_id = authors.id; ";
   //↑　SQL文の内部結合
   //SELECT文の実行
   $result = $mysqli->query($query);
@@ -46,7 +46,7 @@
       <th><?php echo($row['book_id']); ?></th>
         <th><a href= <?php echo "book_show.php?id=" . $row['book_id'] ?>><?php echo($row['title']); ?></a></th>
         <th><?php echo($row['publication_year']); ?></th>
-        <th><?php echo($row['name']); ?></th>
+        <th><?php echo($row['author_name']); ?></th>
       </tr>
       <?php
     }

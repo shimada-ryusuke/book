@@ -11,7 +11,8 @@
   //*********************************​
   //SQL文の作成  
   $query = "";
-  $query .= "SELECT * FROM books INNER JOIN author ON books.author_id = author.id WHERE books.id = ".$_GET['id'];
+  $query .= "SELECT books.id, books.title, books.publication_year, authors.author_name ";
+  $query .= " FROM books, authors WHERE books.id = ".$_GET['id'] . " AND authors.id = books.author_id";
   //SELECT文の実行
   $result = $mysqli->query($query);
   $book_id = "";
@@ -28,10 +29,16 @@
     // echo $_POST["title"];
     $title = $mysqli->real_escape_string($_POST['title']);
     $publication_year = $mysqli->real_escape_string($_POST['publication_year']);
-    $author = $mysqli->real_escape_string($_POST['name']);
+    $author_name = $mysqli->real_escape_string($_POST['author_name']);
     // POSTされた情報をDBに格納する
     $query = "";
-    $query = "UPDATE books SET title = '" . $title . "', publication_year = '" . $publication_year . "', author = '" . $author . "' WHERE id = ".$_GET['id'];    
+    $query = "UPDATE books SET title = '" . $title . "', publication_year = '" . $publication_year . "', author_id. = '" . $author_name . "' WHERE book_id = ".$_GET['id'];
+    $query = "UPDATE authors SET author_name = '" . $author . "' WHERE books.id = ".$_GET['id'] . " AND author.id = books.author_id";
+    
+    // 実行できた文
+    // ⇒UPDATE books SET title = "伝え方が9割" , publication_year = "2000-08-07" WHERE id = "16";
+    // ⇒UPDATE author SET name = "佐々木圭一" WHERE id = "16";
+
     // var_dump($query);
     //↓↓更新できたかどうかのメッセージ出力だから気にしなくていい
     if($mysqli->query($query)) {  ?>
@@ -88,7 +95,7 @@
           </th>
           <th>
             <div class="form-group">
-              <input type="text"  class="form-control" name="author" required value=<?php echo($row['name']);?> />
+              <input type="text"  class="form-control" name="author" required value=<?php echo($row['author_name']);?> />
             </div>
           </th>     
         </tr>

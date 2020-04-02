@@ -32,10 +32,15 @@
     // echo $_POST["title"];
     $title = $mysqli->real_escape_string($_POST['title']);
     $publication_year = $mysqli->real_escape_string($_POST['publication_year']);
-    $author = $mysqli->real_escape_string($_POST['author']);
+    $author_name = $mysqli->real_escape_string($_POST['author_name']);
     // POSTされた情報をDBに格納する
-    $query .= "INSERT INTO books(title, publication_year, author) ";
-    $query .= "VALUES('$title','$publication_year','$author')";
+    $query .= "INSERT INTO books(title, publication_year) ";
+    // $query .= "INSERT INTO books(title, publication_year) SELECT author =name,  ";
+    // ↓これはSQL文の参考
+    // $query .= "SELECT * FROM books INNER JOIN author ON books.author_id = author.id WHERE books.id = ".$_GET['id'];
+    $query .= "VALUES('$title','$publication_year',)";
+    $query .= "INSERT INTO autors(author_name) ";
+    $query .= "VALUES($author_name)";
     //↓↓登録できたかどうかのメッセージ出力だから気にしなくていい
     if($mysqli->query($query)) {  ?>
       <div class="alert alert-success" role="alert">
@@ -60,7 +65,7 @@
       <input type="date"  class="form-control" name="publication_year" placeholder="出版年" required />
     </div> 
     <div class="form-group">
-      <input type="text"  class="form-control" name="author" placeholder="著者" required />
+      <input type="text"  class="form-control" name="author_name" placeholder="著者" required />
     </div> 
     <button type="submit" class="btn btn-default" name="book_register">登録</button>
     <p>

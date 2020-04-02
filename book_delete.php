@@ -10,8 +10,11 @@
   include_once 'dbconnect.php';
   //*********************************​
   //SQL文の作成  
+  // $query = "";
+  // $query .= "SELECT * FROM books WHERE id = ".$_GET['id'];
   $query = "";
-  $query .= "SELECT * FROM books WHERE id = ".$_GET['id'];
+  $query .= "SELECT books.id, books.title, books.publication_year, authors.author_name ";
+  $query .= " FROM books, authors WHERE books.id = ".$_GET['id'] . " AND authors.id = books.author_id";
   //SELECT文の実行
   $result = $mysqli->query($query);
   $book_id = "";
@@ -27,7 +30,8 @@
     //削除ボタンが押された後の処理
     // POSTされた情報をDBに格納する
     $query = "";
-    $query = "DELETE FROM books WHERE id = ".$_GET['id'];    
+    // $query = "DELETE FROM books WHERE id = ".$_GET['id'];
+    $query = "DELETE FROM books, authors WHERE books.id = ".$_GET['id'] . " AND authors.id = books.author_id"; 
     // var_dump($query);
     //↓↓削除できたかどうかのメッセージ出力だから気にしなくていい
     if($mysqli->query($query)) {  ?>
@@ -74,7 +78,7 @@
         <th><?php echo($row['id']); ?></th>
         <th><?php echo($row['title']); ?></a></th>
         <th><?php echo($row['publication_year']); ?></th>
-        <th><?php echo($row['author']); ?></th>  
+        <th><?php echo($row['author_name']); ?></th>  
         </tr>
         <button type="submit"   class="btn btn-default" name="book_delete">YES</button>
         <!-- <p><button type="button" class="btn btn-default" name="book_delete" -->
