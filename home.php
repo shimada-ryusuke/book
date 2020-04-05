@@ -47,7 +47,7 @@ $result->close();
 </ul>
 <p><a href="book_new.php">書籍登録画面へ</a></p>
 <p><a href="book_index.php">書籍一覧画面</a></p>
-<p><a href="book_status.php">貸出管理</a></p>
+<p><a href="rent_index.php">貸出中一覧</a></p>
 <p><a href="logout.php?logout">ログアウト</a></p>
 </div>
 </body>

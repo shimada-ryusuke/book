@@ -34,7 +34,6 @@
     $query = "";
     $query = "UPDATE books SET title = '" . $title . "', publication_year = '" . $publication_year . "', author_id. = '" . $author_name . "' WHERE book_id = ".$_GET['id'];
     $query = "UPDATE authors SET author_name = '" . $author . "' WHERE books.id = ".$_GET['id'] . " AND author.id = books.author_id";
-    
     // 実行できた文
     // ⇒UPDATE books SET title = "伝え方が9割" , publication_year = "2000-08-07" WHERE id = "16";
     // ⇒UPDATE author SET name = "佐々木圭一" WHERE id = "16";

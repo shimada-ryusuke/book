@@ -24,8 +24,14 @@
 </head>
 <body>
 <div class="col-xs-6 col-xs-offset-3">
-  
+
+    
 <?php
+  $query = "";
+  $query .= "SELECT id,author_name FROM authors";
+  //SELECT文の実行
+  $result = $mysqli->query($query);
+ 
   //登録ボタンが押されたときのみ処理
   if(isset($_POST['book_register'])){
     //登録ボタンが押された後の処理
@@ -34,15 +40,13 @@
     $publication_year = $mysqli->real_escape_string($_POST['publication_year']);
     $author_name = $mysqli->real_escape_string($_POST['author_name']);
     // POSTされた情報をDBに格納する
-    $query .= "INSERT INTO books(title, publication_year) ";
-    // $query .= "INSERT INTO books(title, publication_year) SELECT author =name,  ";
-    // ↓これはSQL文の参考
-    // $query .= "SELECT * FROM books INNER JOIN author ON books.author_id = author.id WHERE books.id = ".$_GET['id'];
-    $query .= "VALUES('$title','$publication_year',)";
-    $query .= "INSERT INTO autors(author_name) ";
-    $query .= "VALUES($author_name)";
+    $query = "";
+    $query .= "INSERT INTO `books` (`id`, `title`, `publication_year`, `author_id`) VALUES (NULL, '$title', '$publication_year', NULL);";
+    $query .= "INSERT INTO `authors` (`id`, `author_name`, `created_at`, `updated_at`) VALUES (NULL, '$author_name', current_timestamp(), current_timestamp());";
+     echo $query;
+
     //↓↓登録できたかどうかのメッセージ出力だから気にしなくていい
-    if($mysqli->query($query)) {  ?>
+    if($mysqli->multi_query($query)) {  ?>
       <div class="alert alert-success" role="alert">
         登録しました.
     </div>
@@ -67,6 +71,18 @@
     <div class="form-group">
       <input type="text"  class="form-control" name="author_name" placeholder="著者" required />
     </div> 
+    <div class="form-group">
+    <select name="example" class="form-control">
+          <?php
+          foreach ($result as $row) {
+            ?>
+            <option value=<?php echo($row['id']);?>><?php echo($row['author_name'])?></option>
+            <?php
+            // <?php echo($row['author_name']);
+          }
+          ?>
+      </select>
+    </div>
     <button type="submit" class="btn btn-default" name="book_register">登録</button>
     <p>
     
