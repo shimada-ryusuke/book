@@ -3,6 +3,67 @@
   //sessionのスタート（これがないとSessionを拾ってくれない）
   session_start();
   if( isset($_SESSION['user']) == "") {
+    // ログインしてない場合はリダイレクト
+    header("Location: index.php");
+  }
+  // DBとの接続
+  include_once 'dbconnect.php';
+  //*********************************​
+  //SQL文の作成  
+  $query = "";
+  $query .= "SELECT books.id AS book_id, books.title, books.publication_year, authors.author_name ";
+  $query .= " FROM books, authors WHERE books.author_id = authors.id; ";
+  //↑　SQL文の内部結合
+  //SELECT文の実行
+  $result = $mysqli->query($query);
+?>
+
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>                                          
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>書籍一覧画面</title>
+<link rel="stylesheet" href="style.css">
+​
+<!-- Bootstrap読み込み（スタイリングのため） -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+</head>
+<body>
+  <h1>書籍一覧表示画面</h1>
+  <table class="table">
+    <tr>  
+      <!-- 表の項目名部分 -->
+      <th>id</th>
+      <th>書籍名</th>
+      <th>出版年</th>
+      <th>著者</th>
+    </tr>
+    <?php
+    foreach ($result as $row) {
+      ?>
+      <tr>
+      <th><?php echo($row['book_id']); ?></th>
+        <th><a href= <?php echo "book_show.php?id=" . $row['book_id'] ?>><?php echo($row['title']); ?></a></th>
+        <th><?php echo($row['publication_year']); ?></th>
+        <th><?php echo($row['author_name']); ?></th>
+      </tr>
+      <?php
+    }
+    ?>
+  </table>
+  <p><button type="button" class="btn btn-default"
+      onclick="<?php echo "location.href='home.php". "'" ?>">マイページへ戻る</button></p>
+</body>
+</html>
+
+<!-- ここから下はページ作成の参考用 -->
+
+<?php
+  //*****決まり文句のおまじない******
+  //sessionのスタート（これがないとSessionを拾ってくれない）
+  session_start();
+  if( isset($_SESSION['user']) == "") {
     // ログイン済みの場合はリダイレクト
     header("Location: home.php");
   }
@@ -33,7 +94,7 @@
   $result = $mysqli->query($query);
  
   //登録ボタンが押されたときのみ処理
-  if(isset($_POST['book_register'])){
+  if(isset($_POST['book_search'])){
     //登録ボタンが押された後の処理
     // echo $_POST["title"];
     $title = $mysqli->real_escape_string($_POST['title']);
@@ -41,7 +102,9 @@
     $author_id = $mysqli->real_escape_string($_POST['author_id']);
     // POSTされた情報をDBに格納する
     $query = "";
-    $query .= "INSERT INTO `books` (`id`, `title`, `publication_year`, `author_id`) VALUES (NULL, '$title', '$publication_year', '$author_id');";
+    $query .= "SELECT books.id AS book_id, books.title, books.publication_year, authors.author_name ";
+    $query .= " FROM books, authors WHERE books.author_id = authors.id; ";
+    //↑　SQL文の内部結合
     // $query .= "UPDATE `authors` SET `updated_at` = 'current_timestamp()' WHERE `authors`.`id` = 'books'.'author_id'";
     // $query .= "INSERT INTO `authors` (`id`, `created_at`, `updated_at`) VALUES ('$author_id', current_timestamp(), current_timestamp());";
      echo $query;
@@ -49,7 +112,8 @@
     //↓↓登録できたかどうかのメッセージ出力だから気にしなくていい
     if($mysqli->multi_query($query)) {  ?>
       <div class="alert alert-success" role="alert">
-        登録しました.
+        <p>検索結果を表示します。</p>
+        <p><a href="book_index.php">書籍一覧画面へ</a></p>
     </div>
         <p><a href="book_index.php">書籍一覧画面へ</a></p>
         <p><a href="home.php">マイページ</a></p>
@@ -84,7 +148,7 @@
           ?>
       </select>
     </div>
-    <button type="submit" class="btn btn-default" name="book_register">登録</button>
+    <button type="submit" class="btn btn-default" name="book_search"></button>
     <p>
     
     <!-- <p><a href="logout.php?logout">ログアウト</a></p> -->
