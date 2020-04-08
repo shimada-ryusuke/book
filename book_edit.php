@@ -36,7 +36,7 @@
     // POSTされた情報をDBに格納する
     $query = "";
     // $query = "UPDATE books SET title = '" . $title . "', publication_year = '" . $publication_year . "', author_id. = '" . $author_name . "' WHERE book_id = ".$_GET['id'];
-// ↓変更※updateされるのがauthor_id
+// ↓変更※updateされるのがauthor_idにしたい
     $query = "UPDATE books SET title = '" . $title . "', publication_year = '" . $publication_year . "', author_id. = '" . $author_id . "' WHERE books.id = ".$_GET['id'] . " AND authors.id = books.author_id";
 
     // $query = "UPDATE authors SET author_name = '" . $author_name . "' WHERE books.id = ".$_GET['id'] . " AND authors.id = books.author_id";
