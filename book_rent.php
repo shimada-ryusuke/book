@@ -6,30 +6,16 @@
     // ログインしてない場合はリダイレクト
     header("Location: index.php");
   }
-  // DBとの接続
-  include_once 'dbconnect.php';
-  //*********************************​
-  //SQL文の作成  
-  $query = "";
-  // $query .= "SELECT * FROM books WHERE id = ".$_GET['id'];
-  $query .= "INSERT INTO rental(book_id, user_id, returnFlg, schedule_return_date) ";
-  $query .= " values(".$_GET['id'].",".$_SESSION['user'].", FALSE, '".date("Y-m-d")."'); ";
-  // echo $query;
-  //INSERT文の実行
-  $result = $mysqli->query($query);
-  //redirect
-  header('Location: book_index.php');
-?>
 
-<?php
-    //↓↓削除できたかどうかのメッセージ出力だから気にしなくていい
-    if($mysqli->query($query)) {  ?>
-      <div class="alert alert-success" role="alert">
-        貸出登録しました。
-    </div>
-      <?php } else { ?>
-      <div class="alert alert-danger" role="alert">エラーが発生しました。</div>
-      <?php
-    }
-  
+  function fnc_rent($book_id){
+    // DBとの接続
+    include_once 'dbconnect.php';
+    //SQL文の作成  
+    $query = "";
+    $query .= "INSERT INTO rental(book_id, user_id, returnFlg, schedule_return_date) ";
+    $query .= " values(".$book_id.",".$_SESSION['user'].", FALSE, '".date("Y-m-d")."'); ";
+    //INSERT文の実行
+    $result = $mysqli->query($query);
+    return $result;
+  }
 ?>

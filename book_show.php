@@ -1,4 +1,6 @@
 <?php
+  include "book_rent.php";
+
   //*****決まり文句のおまじない******
   //sessionのスタート（これがないとSessionを拾ってくれない）
   session_start();
@@ -9,6 +11,22 @@
   // DBとの接続
   include_once 'dbconnect.php';
   //*********************************​
+
+  //登録ボタンが押されたときのみ処理
+  $result = false;
+  if(isset($_POST['book_rent'])){
+    $result = fnc_rent($_GET['id']);
+    if($result) {  ?>
+      <div class="alert alert-success" role="alert">
+        登録しました.
+      </div>  <?php 
+    } else { ?>
+      <div class="alert alert-danger" role="alert">
+        エラーが発生しました。
+      </div>  <?php
+    }
+  }
+
   //SQL文の作成  
   $query = "";
   $query .= "SELECT books.id, books.title, books.publication_year, authors.author_name ";
@@ -53,8 +71,7 @@
       </tr>
       <p><button type="button" class="btn btn-default" 
       onclick="<?php echo "location.href='book_edit.php?id=" . $row['id'] . "'" ?>">編集</button></p>
-      <p><button type="button" class="btn btn-default" 
-      onclick="<?php echo "location.href='book_rent.php?id=" . $row['id'] . "'" ?>">貸出する</button></p>
+      <p><button type="submit" class="btn btn-default" name="book_rent">貸出</button></p>
       <p><button type="button" class="btn btn-default" 
       onclick="<?php echo "location.href='book_delete.php?id=" . $row['id'] . "'" ?>">削除する</button></p>
       <p><button type="button" class="btn btn-default"
