@@ -12,7 +12,7 @@
   //SQL文の作成  
   $query = "";
   // 4/8追記：↓author_id更新の為、必要なデータを呼び出す。
-  $query .= "SELECT books.id, books.title, books.publication_year, books.author_id, authors.id , authors.author_name ";
+  $query .= "SELECT books.id as book_id, books.title, books.publication_year, books.author_id, authors.id , authors.author_name ";
   $query .= " FROM books, authors WHERE books.id = ".$_GET['id'] . " AND authors.id = books.author_id";
   //SELECT文の実行
   echo $query;
@@ -89,7 +89,8 @@
       ?>
       <form method="post">
         <tr>
-          <th><?php echo($row['id']); ?></th>
+          <!-- ↓この部分 -->
+          <th><?php echo($row['book_id']); ?></th>
           <th>
             <div class="form-group">
               <input type="text"  class="form-control" name="title" required value=<?php echo($row['title']);?> />
@@ -122,7 +123,7 @@
         </tr>
         <button type="submit"   class="btn btn-default" name="book_update">更新</button>
         <p><button type="button" class="btn btn-default" 
-          onclick="<?php echo "location.href='book_show.php?id=" . $row['id'] . "'" ?>">詳細へ戻る</button></p>
+          onclick="<?php echo "location.href='book_show.php?id=" . $row['book_id'] . "'" ?>">詳細へ戻る</button></p>
       </form>
       <?php
     }
