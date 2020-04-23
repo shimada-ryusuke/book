@@ -1,6 +1,4 @@
 <?php
-  //*****決まり文句のおまじない******
-  //sessionのスタート（これがないとSessionを拾ってくれない）
   session_start();
   if( isset($_SESSION['user']) == "") {
     // ログインしてない場合はリダイレクト
@@ -8,14 +6,13 @@
   }
   // DBとの接続
   include_once 'dbconnect.php';
-  //*********************************​
-  //SQL文の作成  
+
   $query = "";
   // 4/8追記：↓author_id更新の為、必要なデータを呼び出す。
   $query .= "SELECT books.id as book_id, books.title, books.publication_year, books.author_id, authors.id , authors.author_name ";
   $query .= " FROM books, authors WHERE books.id = ".$_GET['id'] . " AND authors.id = books.author_id";
   //SELECT文の実行
-  echo $query;
+  // echo $query;
   $result = $mysqli->query($query);
   $book_id = "";
   foreach ($result as $row) {
@@ -35,19 +32,11 @@
 
     // POSTされた情報をDBに格納する
     $query = "";
-    // $query = "UPDATE books SET title = '" . $title . "', publication_year = '" . $publication_year . "', author_id. = '" . $author_name . "' WHERE book_id = ".$_GET['id'];
 // ↓変更※updateされるのがauthor_idにしたい
-    $query = "UPDATE books SET title = '" . $title . "', publication_year = '" . $publication_year . "', author_id. = '" . $author_id . "' WHERE books.id = ".$_GET['id'] . " AND authors.id = books.author_id";
+    $query = "UPDATE books SET title = '" . $title . "', publication_year = '" . $publication_year . "', author_id= '" . $author_id . "' WHERE books.id = ".$_GET['id'] ;
+    echo $query;
 
-    // $query = "UPDATE authors SET author_name = '" . $author_name . "' WHERE books.id = ".$_GET['id'] . " AND authors.id = books.author_id";
-
-
-    // 実行できた文
-    // ⇒UPDATE books SET title = "伝え方が9割" , publication_year = "2000-08-07" WHERE id = "16";
-    // ⇒UPDATE author SET name = "佐々木圭一" WHERE id = "16";
-
-    // var_dump($query);
-    //↓↓更新できたかどうかのメッセージ出力だから気にしなくていい
+    //↓↓更新できたかどうかのメッセージ出力
     if($mysqli->multi_query($query)) {  ?>
       <div class="alert alert-success" role="alert">
         更新しました。
@@ -89,7 +78,6 @@
       ?>
       <form method="post">
         <tr>
-          <!-- ↓この部分 -->
           <th><?php echo($row['book_id']); ?></th>
           <th>
             <div class="form-group">
@@ -101,11 +89,6 @@
               <input type="date"  class="form-control" name="publication_year" required value=<?php echo($row['publication_year']);?> />
             </div>
           </th>
-          <!-- <th>
-            <div class="form-group">
-              <input type="text"  class="form-control" name="author_name" required value=<?php echo($row['author_name']);?> />
-            </div>
-          </th> -->
           <th> 
             <div class="form-group">
               <select name="author_id" class="form-control">
@@ -114,7 +97,6 @@
                   ?>
                   <option value=<?php echo($row['id']);?>><?php echo($row['author_name'])?></option>
                   <?php
-                  // <?php echo($row['author_name'])<?php echo($row['id']);
                 }
                 ?>
               </select>
@@ -131,5 +113,3 @@
   </table>
 </body>
 </html>
-
-<!-- UPDATE books SET title="伝える力２",publication_year="2020-01-22" ,author="池上彰" WHERE id = 2 -->

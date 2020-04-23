@@ -1,6 +1,5 @@
+<!-- 図書検索システム　４月２３日時点で実装中 -->
 <?php
-  //*****決まり文句のおまじない******
-  //sessionのスタート（これがないとSessionを拾ってくれない）
   session_start();
   if( isset($_SESSION['user']) == "") {
     // ログインしてない場合はリダイレクト
@@ -8,7 +7,6 @@
   }
   // DBとの接続
   include_once 'dbconnect.php';
-  //*********************************​
   //SQL文の作成  
   $query = "";
   $query .= "SELECT books.id AS book_id, books.title, books.publication_year, authors.author_name ";
@@ -60,8 +58,6 @@
 <!-- ここから下はページ作成の参考用 -->
 
 <?php
-  //*****決まり文句のおまじない******
-  //sessionのスタート（これがないとSessionを拾ってくれない）
   session_start();
   if( isset($_SESSION['user']) == "") {
     // ログイン済みの場合はリダイレクト
@@ -69,7 +65,6 @@
   }
   // DBとの接続
   include_once 'dbconnect.php';
-  //*********************************
 ?>
 ​
 <!DOCTYPE HTML>
@@ -105,11 +100,9 @@
     $query .= "SELECT books.id AS book_id, books.title, books.publication_year, authors.author_name ";
     $query .= " FROM books, authors WHERE books.author_id = authors.id; ";
     //↑　SQL文の内部結合
-    // $query .= "UPDATE `authors` SET `updated_at` = 'current_timestamp()' WHERE `authors`.`id` = 'books'.'author_id'";
-    // $query .= "INSERT INTO `authors` (`id`, `created_at`, `updated_at`) VALUES ('$author_id', current_timestamp(), current_timestamp());";
      echo $query;
 
-    //↓↓登録できたかどうかのメッセージ出力だから気にしなくていい
+    //↓↓登録できたかどうかのメッセージ出力
     if($mysqli->multi_query($query)) {  ?>
       <div class="alert alert-success" role="alert">
         <p>検索結果を表示します。</p>
@@ -133,9 +126,6 @@
     <div class="form-group">
       <input type="date"  class="form-control" name="publication_year" placeholder="出版年" required />
     </div> 
-    <!-- <div class="form-group">
-      <input type="text"  class="form-control" name="author_name" placeholder="著者" required />
-    </div>  -->
     <div class="form-group">
     <select name="author_id" class="form-control">
           <?php
@@ -143,21 +133,14 @@
             ?>
             <option value=<?php echo($row['id']);?>><?php echo($row['author_name'])?></option>
             <?php
-            // <?php echo($row['author_name'])<?php echo($row['id']);
           }
           ?>
       </select>
     </div>
     <button type="submit" class="btn btn-default" name="book_search"></button>
-    <p>
-    
-    <!-- <p><a href="logout.php?logout">ログアウト</a></p> -->
-    <!-- <p><a href="home.php">マイページ</a></p> -->
-    </p>
   </form>
   <p><input type="button" value="マイページ" onClick="location.href='home.php'"></p>
   <p><input type="button" value="書籍一覧表示へ" onClick="location.href='book_index.php'"></p>
-  <!-- <p><button type="button" class="btn btn-default" href="logout.php?logout">ログアウト</button></p> -->
 </div>
 </body>
 </html>

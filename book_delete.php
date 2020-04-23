@@ -1,6 +1,4 @@
 <?php
-  //*****決まり文句のおまじない******
-  //sessionのスタート（これがないとSessionを拾ってくれない）
   session_start();
   if( isset($_SESSION['user']) == "") {
     // ログインしてない場合はリダイレクト
@@ -8,10 +6,7 @@
   }
   // DBとの接続
   include_once 'dbconnect.php';
-  //*********************************​
-  //SQL文の作成  
-  // $query = "";
-  // $query .= "SELECT * FROM books WHERE id = ".$_GET['id'];
+
   $query = "";
   $query .= "SELECT books.id, books.title, books.publication_year, authors.author_name ";
   $query .= " FROM books, authors WHERE books.id = ".$_GET['id'] . " AND authors.id = books.author_id";
@@ -30,10 +25,9 @@
     //削除ボタンが押された後の処理
     // POSTされた情報をDBに格納する
     $query = "";
-    // $query = "DELETE FROM books WHERE id = ".$_GET['id'];
-    $query = "DELETE FROM books, authors WHERE books.id = ".$_GET['id'] . " AND authors.id = books.author_id"; 
-    // var_dump($query);
-    //↓↓削除できたかどうかのメッセージ出力だから気にしなくていい
+    $query = "DELETE FROM books WHERE id = ".$_GET['id'] ; 
+    var_dump($query);
+    //↓↓削除できたかどうかのメッセージ出力
     if($mysqli->query($query)) {  ?>
       <div class="alert alert-success" role="alert">
         削除しました。
@@ -81,7 +75,6 @@
         <th><?php echo($row['author_name']); ?></th>  
         </tr>
         <button type="submit"   class="btn btn-default" name="book_delete">YES</button>
-        <!-- <p><button type="button" class="btn btn-default" name="book_delete" -->
       <!-- onclick="<?php echo "location.href='book_delete complete.php". "'" ?>">選択中の書籍情報を削除します</button></p> -->
         <p><button type="button" class="btn btn-default" 
           onclick="<?php echo "location.href='book_show.php?id=" . $row['id'] . "'" ?>">NO(詳細へ戻る)</button></p>
@@ -92,5 +85,3 @@
   </table>
 </body>
 </html>
-
-<!-- UPDATE books SET title="伝える力２",publication_year="2020-01-22" ,author="池上彰" WHERE id = 2 -->

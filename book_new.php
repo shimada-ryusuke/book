@@ -1,6 +1,4 @@
 <?php
-  //*****決まり文句のおまじない******
-  //sessionのスタート（これがないとSessionを拾ってくれない）
   session_start();
   if( isset($_SESSION['user']) == "") {
     // ログイン済みの場合はリダイレクト
@@ -8,7 +6,6 @@
   }
   // DBとの接続
   include_once 'dbconnect.php';
-  //*********************************
 ?>
 ​
 <!DOCTYPE HTML>
@@ -35,18 +32,15 @@
   //登録ボタンが押されたときのみ処理
   if(isset($_POST['book_register'])){
     //登録ボタンが押された後の処理
-    // echo $_POST["title"];
     $title = $mysqli->real_escape_string($_POST['title']);
     $publication_year = $mysqli->real_escape_string($_POST['publication_year']);
     $author_id = $mysqli->real_escape_string($_POST['author_id']);
     // POSTされた情報をDBに格納する
     $query = "";
     $query .= "INSERT INTO `books` (`id`, `title`, `publication_year`, `author_id`) VALUES (NULL, '$title', '$publication_year', '$author_id');";
-    // $query .= "UPDATE `authors` SET `updated_at` = 'current_timestamp()' WHERE `authors`.`id` = 'books'.'author_id'";
-    // $query .= "INSERT INTO `authors` (`id`, `created_at`, `updated_at`) VALUES ('$author_id', current_timestamp(), current_timestamp());";
      echo $query;
 
-    //↓↓登録できたかどうかのメッセージ出力だから気にしなくていい
+    //↓↓登録できたかどうかのメッセージ出力
     if($mysqli->multi_query($query)) {  ?>
       <div class="alert alert-success" role="alert">
         登録しました.
@@ -69,9 +63,6 @@
     <div class="form-group">
       <input type="date"  class="form-control" name="publication_year" placeholder="出版年" required />
     </div> 
-    <!-- <div class="form-group">
-      <input type="text"  class="form-control" name="author_name" placeholder="著者" required />
-    </div>  -->
     <div class="form-group">
     <select name="author_id" class="form-control">
           <?php
@@ -79,21 +70,14 @@
             ?>
             <option value=<?php echo($row['id']);?>><?php echo($row['author_name'])?></option>
             <?php
-            // <?php echo($row['author_name'])<?php echo($row['id']);
           }
           ?>
       </select>
     </div>
     <button type="submit" class="btn btn-default" name="book_register">登録</button>
-    <p>
-    
-    <!-- <p><a href="logout.php?logout">ログアウト</a></p> -->
-    <!-- <p><a href="home.php">マイページ</a></p> -->
-    </p>
   </form>
   <p><input type="button" value="マイページ" onClick="location.href='home.php'"></p>
   <p><input type="button" value="書籍一覧表示へ" onClick="location.href='book_index.php'"></p>
-  <!-- <p><button type="button" class="btn btn-default" href="logout.php?logout">ログアウト</button></p> -->
 </div>
 </body>
 </html>
